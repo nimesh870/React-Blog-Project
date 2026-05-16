@@ -18,12 +18,13 @@ export class DatabaseService {
 
     // create document
     async createPost ({title , slug , content , featuredImage , status , userId}) {
+        // SDK fires HTTP POST request to Appwrite server
         try {
             return await this.databases.createDocument(
                 config.databaseId,
                 config.collectionId,
-                slug,
-                {
+                slug, // document ID
+                { // actual stored data
                     title,
                     content,
                     featuredImage,
@@ -39,13 +40,14 @@ export class DatabaseService {
 
     // update document
     async updatePost (slug , {title , content , featuredImage , status , userId}) {
+        // SDK fires HTTP PATCH request
         try {
             return await this.databases.updateDocument(
                 config.databaseId,
                 config.collectionId,
                 slug,
 
-                {
+                { // new updated values
                     title,
                     content,
                     featuredImage,
@@ -67,7 +69,7 @@ export class DatabaseService {
                 config.collectionId,
                 slug,
             )
-            return true
+            return true // UI knows there's no document
         }
         catch (error) {
             console.log("Appwrite service :: deletePost :: error", error)
@@ -76,6 +78,7 @@ export class DatabaseService {
     }
 
     async getPost (slug) {
+        // HTTP GET request -> Fetch post using slug
         try {
             return await this.databases.getDocument(
                 config.databaseId,
@@ -90,9 +93,10 @@ export class DatabaseService {
     }
 
     async getPosts (queries = [Query.equal('status' , 'active')]) {
+        // fetches only post with status = active (filtering using query)
         try {
             return await this.databases.listDocuments(
-                config.appwriteUrl,
+                config.databaseId,
                 config.collectionId,
                 queries
             )
@@ -103,7 +107,7 @@ export class DatabaseService {
         }
     }
 
-    // file upload methods
+    // file upload methods -> Storage Service
     async uploadFile (file) {
         try {
             return await this.storage.createFile(
@@ -126,13 +130,14 @@ export class DatabaseService {
             )
         } 
         catch (error) {
-            onsole.log("Appwrite service :: deleteFile :: error", error)
+            console.log("Appwrite service :: deleteFile :: error", error)
             return false
         }
     }
 
     getFilePreview(fileId) {
-        return this.databases.storage.getFilePreview(
+        //  returns URL string of image from storage
+        return this.storage.getFilePreview(
             config.bucketId,
             fileId
         )
