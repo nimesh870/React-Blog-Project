@@ -31,7 +31,7 @@ export class AuthService {
             }
         }
         catch (error) {
-            throw error;
+            console.log("Appwrite service :: createUserAccount :: error", error)
         }
     }
 
@@ -42,7 +42,7 @@ export class AuthService {
             return userLogin;
         }
         catch (error) {
-            throw error;
+            console.log("Appwrite service :: login :: error", error)
         }
     }
 
@@ -51,17 +51,20 @@ export class AuthService {
             return await this.account.deleteSessions()
         }
         catch (error) {
-            throw error;
+            console.log("Appwrite service :: logout :: error", error)
         }
     }
 
+    //checks if there is an active session and returns the current logged in user even after page reloads
     async getUser() {
         try {
             return await this.account.get()
         }
         catch (error) {
-            return null;
+            console.log("Appwrite service :: getUser :: error", error)
         }
+
+        return null;
     }
 }
 
