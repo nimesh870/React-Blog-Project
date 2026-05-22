@@ -19,7 +19,7 @@ const AuthLayout = ({children , authentication = true}) => {
         setLoader(false)
     }, [authStatus , navigate , authentication])
 
-    return loader ? <h1>Loading,Please wait...</h1> : {children}
+    return loader ? <h1>Loading,Please wait...</h1> : <>{children}</>
 }
 
 export default AuthLayout

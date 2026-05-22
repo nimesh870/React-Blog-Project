@@ -1,7 +1,5 @@
 import React , { useState } from 'react'
-import Button from './Button'
-import Input from './Input'
-import { Logo } from './index'
+import { Logo , Button , Input } from './index'
 import authService from '../appwrite_services/authentication'
 import { Link , useNavigate } from 'react-router-dom'
 import { login } from '../features/authSlice'

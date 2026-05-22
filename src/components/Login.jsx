@@ -1,8 +1,6 @@
 import React , { useState } from 'react'
 import { Link , useNavigate } from 'react-router-dom'
-import Button from './Button'
-import Input from './Input'
-import { Logo } from './index'
+import { Logo , Input , Button} from './index'
 import { useDispatch } from 'react-redux'
 import authService from '../appwrite_services/authentication'
 import { login as authLogin } from '../features/authSlice'
@@ -60,6 +58,7 @@ const Login = () => {
                     label = "Email: "
                     placeholder = "example@example.com"
                     type ='email'
+                    // register → lets React Hook Form track input values without needing useState
                     {...register('email' , {
                         required : true,
                         validate : {
