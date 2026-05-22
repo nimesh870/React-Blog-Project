@@ -1,6 +1,5 @@
 import React , { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import Button from '../Button'
 import TextEditor from '../TextEditor'
 import { Button , Input , Select , TextEditor } from '../index'
 import databaseService from '../../appwrite_services/database'
@@ -18,11 +17,11 @@ const PostForm = ({post}) => {
   })
 
   const navigate = useNavigate()
-  const userData = useSelector(state => state.user.userData)
+  const userData = useSelector(state => state.auth.userData)
 
   const submit = async (data) => {
     if (post) {
-      const file = data.image[0] ? databaseService.uploadFile(data.image[0]) : null
+      const file = data.image[0] ? await databaseService.uploadFile(data.image[0]) : null
 
       // delete image
       if (file) {
@@ -61,8 +60,8 @@ const PostForm = ({post}) => {
   const slugTransform = useCallback( (value) => {
     if (value && typeof value === 'string') {
       return value.trim().toLowerCase().replace(/[^a-zA-Z\d\s]+/g, "-").replace(/\s/g, "-")
-      return '';
     }
+    return '';
   } , [])
 
   useEffect(() => {
@@ -110,7 +109,7 @@ const PostForm = ({post}) => {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={databaseService.getFilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />

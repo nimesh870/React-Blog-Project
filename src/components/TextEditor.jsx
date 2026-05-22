@@ -6,12 +6,12 @@ const TextEditor = ({name , control , defaultValue = '' , label}) => {
   return (
     <div className='w-full'>
         {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
-        <Controller 
+        <Controller // tracks the values of non-native input fields
             name = { name || 'blog-content'}
             control={control} // control → object from useForm that lets Controller connect inputs to the form
             render={({field : {onChange}}) => (
                 <Editor
-                    initialValue = {defualtValue}
+                    initialValue = {defaultValue}
                     onEditorChange={onChange}
                     init={
                         {
@@ -43,7 +43,7 @@ const TextEditor = ({name , control , defaultValue = '' , label}) => {
                                     ],
 
                             toolbar: "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
-                                     content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+                            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
 
                         }
                     }
