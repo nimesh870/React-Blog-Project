@@ -20,31 +20,35 @@ const PostForm = ({post}) => {
   const userData = useSelector(state => state.auth.userData)
 
   const submit = async (data) => {
+
     if (post) {
+      // returns file id
       const file = data.image[0] ? await databaseService.uploadFile(data.image[0]) : null
 
-      // delete image
+      // delete image if user uploaded new image
       if (file) {
         databaseService.deleteFile(post.featuredImage)
       }
 
-    // update post
+    // update image
     const dbPost = await databaseService.updatePost(post.$id , {
       ...data,
       featuredImage : file ? file.$id : undefined,
     })
 
-    // navigate to post
-    if (dbPost) {
-        navigate(`/post/${dbPost.$id}`)
+      // navigate to post
+      if (dbPost) {
+          navigate(`/post/${dbPost.$id}`)
       }
 
+      // post image
     } else {
       const file = await databaseService.uploadFile(data.image[0])
 
       if (file) {
         const fileId = file.$id
         data.featuredImage = fileId
+
         const dbPost = await databaseService.createPost({
           ...data,
           userId : userData.$id
@@ -67,12 +71,12 @@ const PostForm = ({post}) => {
   useEffect(() => {
     const subscription = watch( (value , {name}) => {
       if (name === 'title') {
-        setValue('slug' , slugTransform(value.title , {shouldValidate : true}))
+        setValue('slug' , slugTransform(value.title) , {shouldValidate : true})
       }
     })
 
     return () => {
-      subscription.unsubscribe()
+      subscription.unsubscribe() // stops watching
     }
   }, [watch , slugTransform , setValue])
   

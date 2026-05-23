@@ -1,9 +1,9 @@
-import config from '../config.js'
+import config from '../config/config'
 import { Client , ID , Databases , Storage , Query } from "appwrite";
 
 export class DatabaseService {
 
-    cilent = new Client();
+    client = new Client();
     databases;
     storage;
 

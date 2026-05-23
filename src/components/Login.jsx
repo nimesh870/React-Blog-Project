@@ -10,7 +10,7 @@ const Login = () => {
     
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const {register , handleSubmit , formState : {error}} = useForm()
+    const {register , handleSubmit } = useForm()
     const [error, setError] = useState('')
 
     const login = async ({email , password}) => {

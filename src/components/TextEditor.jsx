@@ -7,7 +7,7 @@ const TextEditor = ({name , control , defaultValue = '' , label}) => {
     <div className='w-full'>
         {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
         <Controller // tracks the values of non-native input fields
-            name = { name || 'blog-content'}
+            name = { name || 'content'}
             control={control} // control → object from useForm that lets Controller connect inputs to the form
             render={({field : {onChange}}) => (
                 <Editor

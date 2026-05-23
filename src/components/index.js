@@ -9,6 +9,7 @@ import Input from './Input'
 import Login from './Login'
 import Signup from './SignUp'
 import AuthLayout from './AuthLayout'
+import Button from './Button'
 
 export {
     Header,
@@ -21,5 +22,6 @@ export {
     Input,
     Login,
     Signup,
-    AuthLayout
+    AuthLayout,
+    Button
 }

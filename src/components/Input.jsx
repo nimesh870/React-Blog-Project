@@ -1,13 +1,12 @@
 import React from 'react'
-import { forwardRef } from 'react'
 import { useId } from 'react'
 
 const Input = ({
     label,
     type = 'text',
     className = '',
-    ...props,
     ref,
+    ...props
 }) => {
     const id = useId()
     return (
