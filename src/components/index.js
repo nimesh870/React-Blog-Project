@@ -10,6 +10,7 @@ import Login from './Login'
 import Signup from './SignUp'
 import AuthLayout from './AuthLayout'
 import Button from './Button'
+import PostForm from './postFormComponent/PostForm'
 
 export {
     Header,
@@ -22,6 +23,7 @@ export {
     Input,
     Login,
     Signup,
-    AuthLayout,
-    Button
+    Button,
+    PostForm,
+    AuthLayout
 }

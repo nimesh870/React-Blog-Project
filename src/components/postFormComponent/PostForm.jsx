@@ -1,6 +1,5 @@
 import React , { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import TextEditor from '../TextEditor'
 import { Button , Input , Select , TextEditor } from '../index'
 import databaseService from '../../appwrite_services/database'
 import { useNavigate } from 'react-router-dom'
@@ -63,7 +62,7 @@ const PostForm = ({post}) => {
 
   const slugTransform = useCallback( (value) => {
     if (value && typeof value === 'string') {
-      return value.trim().toLowerCase().replace(/[^a-zA-Z\d\s]+/g, "-").replace(/\s/g, "-")
+      return value.trim().toLowerCase().replace(/[^a-zA-Z\ d\s]+/g, "-").replace(/\s/g, "-")
     }
     return '';
   } , [])
