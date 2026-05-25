@@ -8,8 +8,9 @@ const EditPost = () => {
 
     const {slug} = useParams()
     const navigate = useNavigate()
-    const [post, setPost] = useState([])
+    const [post, setPost] = useState(null)
 
+    // fetches the post from appwrite using slug from the URL
     useEffect( () => {
         if (slug) {
             databaseService.getPost(slug).then( (post) => setPost(post) )
@@ -25,7 +26,7 @@ const EditPost = () => {
             <PostForm post={post} />
         </Container>
     </div>
-  ) : null
+  ) : <div>No Post here!</div>
 }
 
 export default EditPost

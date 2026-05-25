@@ -13,13 +13,18 @@ const SignUp = () => {
     const {register , handleSubmit} = useForm()
     const [error, setError] = useState('')
 
-    const signUp = async ({email , password , name}) => {
+    const signUp = async ({$id , email , password , name}) => {
         setError('')
         try {
-            const userAccount = await authService.createUserAccount(email , password , name)
+            const userAccount = await authService.createUserAccount({email , password , name})
             if (userAccount) {
                 const currentUserData = await authService.getUser()
-                if (currentUserData)  dispatch(login(currentUserData))
+                if (currentUserData)  dispatch(login({
+                    $id : currentUserData.$id,
+                    name : currentUserData.name,
+                    email : currentUserData.email,
+                    password : currentUserData.password
+                }))
                 navigate('/')
             }
         } catch (error) {
@@ -84,7 +89,7 @@ const SignUp = () => {
                             })}
                         />
 
-                        <Button type='submit' className='w-full'>Create Account</Button>
+                        <Button type='submit' className='w-full cursor-pointer'>Create Account</Button>
                     </div>
                 </form>
         </div>

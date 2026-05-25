@@ -17,11 +17,15 @@ const Login = () => {
         setError('')
         try {
             // returns session if credentials are matched
-            const session = await authService.login(email , password)
+            const session = await authService.login({email , password})
             if (session) {
                 // fetches data of logged user
                 const userData = await authService.getUser()
-                if (userData) dispatch(authLogin(userData)) // updates status and userData
+                if (userData) dispatch(authLogin({
+                    $id : userData.$id,
+                    email : userData.email,
+                    password : userData.password
+                })) // updates status and userData
                 navigate('/')
             }
         } 
@@ -79,7 +83,7 @@ const Login = () => {
                     })}
                   />
 
-                  <Button type='submit' className='w-full'>Sign In</Button>
+                  <Button type='submit' className='w-full cursor-pointer'>Sign In</Button>
             </div>
         </form>
       </div>

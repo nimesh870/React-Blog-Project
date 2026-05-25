@@ -1,6 +1,7 @@
 import React from 'react'
 import { Editor } from '@tinymce/tinymce-react'
 import { Controller } from 'react-hook-form'
+import config from '../config/config'
 
 const TextEditor = ({name , control , defaultValue = '' , label}) => {
   return (
@@ -11,6 +12,7 @@ const TextEditor = ({name , control , defaultValue = '' , label}) => {
             control={control} // control → object from useForm that lets Controller connect inputs to the form
             render={({field : {onChange}}) => (
                 <Editor
+                    apiKey={config.tinyMceApiKey}
                     initialValue = {defaultValue}
                     onEditorChange={onChange}
                     init={

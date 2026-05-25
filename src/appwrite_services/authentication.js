@@ -24,7 +24,7 @@ export class AuthService {
 
             if (userAccont) {
                 // login to the account direct if userAccount exist
-                return this.login({email , passowrd}) // calling another method i.e login
+                return this.login({email , password}) // calling another method i.e login
             } 
             else {
                 return userAccont;

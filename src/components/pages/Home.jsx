@@ -7,6 +7,7 @@ const Home = () => {
 
     const [posts, setPosts] = useState([])
 
+    // fetches all active post from appwrite and display them as cards
     useEffect( () => {
         databaseService.getPosts().then( (posts) => {
             if (posts) {
@@ -31,7 +32,7 @@ const Home = () => {
             <Container>
                 <div className='flex flex-wrap'>
                     {posts.map( (post) => (
-                        <div key={posts.$id} className='p-2 w-1/4'>
+                        <div key={post.$id} className='p-2 w-1/4'>
                             <PostCard {...post} />
                         </div>
                     ) )}

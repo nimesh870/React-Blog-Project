@@ -14,7 +14,11 @@ function App() {
     authService.getUser()
     .then( (userData) =>{
       if (userData) {
-        dispatch(login(userData)) // dispatch data to store there is userData
+        dispatch(login({
+          $id : userData.$id,
+          name : userData.name,
+          email : userData.email
+        })) // dispatch data to store
       }
       else {
         dispatch(logout())

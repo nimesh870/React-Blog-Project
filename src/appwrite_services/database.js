@@ -17,7 +17,7 @@ export class DatabaseService {
     }
 
     // create document
-    async createPost ({title , slug , content , featuredImage , status , userId}) {
+    async createPost ( {title , slug , content , featuredImage , status , userId}) {
         // SDK fires HTTP POST request to Appwrite server
         try {
             return await this.databases.createDocument(
@@ -30,6 +30,7 @@ export class DatabaseService {
                     featuredImage,
                     status,
                     userId,
+                    slug
                 }
             )
         }
@@ -137,7 +138,7 @@ export class DatabaseService {
 
     getFilePreview(fileId) {
         //  returns URL string of image from storage
-        return this.storage.getFilePreview(
+        return this.storage.getFileView(
             config.bucketId,
             fileId
         )
