@@ -24,7 +24,7 @@ const Login = () => {
                 if (userData) dispatch(authLogin({
                     $id : userData.$id,
                     email : userData.email,
-                    password : userData.password
+                    name : userData.name
                 })) // updates status and userData
                 navigate('/')
             }
@@ -35,28 +35,37 @@ const Login = () => {
     }
     
   return (
-    <div className='flex items-center justify-center w-full'>
-      <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
+    <div className='flex items-center justify-center w-full min-h-screen bg-slate-50'>
+      <div className={`mx-auto w-full max-w-lg bg-white rounded-2xl p-10
+         border border-slate-200 shadow-xl shadow-slate-200/50`}>
         <div className='mb-2 flex justify-center'>
             <span className='inline-block w-full max-w-25'>
                 <Logo width='100%' />
             </span>
         </div>
-            <h2 className='text-center text-2xl font-bold leading-tight'>Sign in to your account</h2>
-            <p className="mt-2 text-center text-base text-black/60">
+            <h2 className='text-center text-3xl font-extrabold
+             text-slate-900 leading-tight mt-4'>Sign in to your account</h2>
+            <p className="mt-2 text-center text-sm text-slate-500">
                 Don't have any account?&nbsp;
                 <Link
                         to="/signup"
-                        className="font-medium text-primary transition-all duration-200 hover:underline"
+                        className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200"
                     >
                         Sign Up
                 </Link>
         </p>
-        {error.email && <p className='text-red-600 mt-8 text-center'>{error.email.message}</p>}
-        {error.password && <p className='text-red-600 mt-8 text-center'>{error.password.message}</p>}
 
-        <form onSubmit={handleSubmit(login)} className='mt-8'>
-            <div className='space-y-5'>
+        {error && (
+                    <p className='text-red-500 text-sm text-center mt-4 
+                    bg-red-50 border border-red-200 
+                    rounded-xl py-2 px-4'>
+                        {error}
+                 </p>
+        )}
+
+
+        <form onSubmit={handleSubmit(login)} className='mt-6 space-y-1'>
+            <div className='space-y-1'>
                 {/* Email input */}
                 <Input
                     label = "Email: "

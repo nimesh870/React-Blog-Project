@@ -36,32 +36,34 @@ export default function UserPost() {
     };
 
     return post ? (
-        <div className="py-8">
+        <div className="py-12 min-h-screen bg-slate-50">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                <div className="w-full flex justify-center mb-8 relative border
+                 border-slate-200 rounded-2xl p-2 shadow-sm overflow-hidden">
                     <img
                         src={databaseService.getFilePreview(post.featuredImage)}
                         alt={post.title}
-                        className="rounded-xl"
+                        className="rounded-xl w-full max-w-125 object-cover"
                     />
 
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3 cursor-pointer active:scale-90">
+                                <Button bgColor="bg-emerald-500 hover:bg-emerald-600" className="mr-3 cursor-pointer shadow-md">
                                     Edit
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-500" className="cursor-pointer active:scale-90" onClick={deletePost}>
+                            <Button bgColor="bg-red-500 hover:bg-red-600" className="cursor-pointer shadow-md" onClick={deletePost}>
                                 Delete
                             </Button>
                         </div>
                     )}
                 </div>
-                <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
+                <div className="w-full mb-6 pb-6 border-b border-slate-400">
+                    <h1 className="text-3xl font-extrabold text-slate-900 leading-tight">{post.title}</h1>
                 </div>
-                <div className="browser-css">
+                <div className="browser-css prose prose-slate max-w-none
+                            text-slate-700 leading-relaxed">
                     {parse(post.content)} {/* Parsing Html string from TinyMce editor to React Component */}
                     </div>
             </Container>

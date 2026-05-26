@@ -4,14 +4,18 @@ import { Link } from 'react-router-dom'
 
 const PostCard = ({ $id , title , featuredImage }) => {
   return (
-    <Link to={`/post/${$id}`}>
-        <div className='w-full bg-gray-100 rounded-xl p-4'>
-            <div className='flex justify-center w-full mb-4'>
+    <Link to={`/post/${$id}`} className='group'>
+        <div className='w-full bg-white rounded-2xl p-4
+         shadow-md hover:shadow-xl hover:-translate-y-1
+          transition-all duration-300 border border-slate-100'>
+            <div className='w-full mb-4 overflow-hidden rounded-xl'>
                 <img src={databaseService.getFilePreview(featuredImage)} alt={title} 
-                className='rounded-xl'
+                className='w-full h-48 object-cover rounded-xl
+                hover:scale-105 transition-transform duration-300'
                 />
             </div>
-            <h2 className='text-xl font-bold'>{title}</h2>
+            <h2 className='text-lg font-bold text-slate-800
+            group-hover:text-indigo-600 transition-colors duration-200 mt-1'>{title}</h2>
         </div>
     </Link>
   )

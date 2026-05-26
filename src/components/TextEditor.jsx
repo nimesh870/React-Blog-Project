@@ -5,8 +5,9 @@ import config from '../config/config'
 
 const TextEditor = ({name , control , defaultValue = '' , label}) => {
   return (
-    <div className='w-full'>
-        {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
+    <div className='w-full rounded-xl overflow-hidden border border-slate-200'>
+        {label && <label className='inline-block mb-1.5
+         pl-1 text-sm font-medium text-slate-700'>{label}</label>}
         <Controller // tracks the values of non-native input fields
             name = { name || 'content'}
             control={control} // control → object from useForm that lets Controller connect inputs to the form
@@ -45,7 +46,15 @@ const TextEditor = ({name , control , defaultValue = '' , label}) => {
                                     ],
 
                             toolbar: "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
-                            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+                            content_style: ` body {
+                                font-family: 'Inter', Helvetica, Arial, sans-serif;
+                                font-size: 15px;
+                                line-height: 1.7;
+                                color: #1e293b;
+                                max-width: 100%;
+                                padding: 10px;
+                            }`
+                            
 
                         }
                     }
