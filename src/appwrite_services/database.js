@@ -136,7 +136,7 @@ export class DatabaseService {
         }
     }
 
-    getFilePreview(fileId) {
+    getFileView(fileId) {
         //  returns URL string of image from storage
         return this.storage.getFileView(
             config.bucketId,

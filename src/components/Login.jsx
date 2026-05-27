@@ -24,7 +24,7 @@ const Login = () => {
                 if (userData) dispatch(authLogin({
                     $id : userData.$id,
                     email : userData.email,
-                    name : userData.name
+                    name : userData.name,
                 })) // updates status and userData
                 navigate('/')
             }

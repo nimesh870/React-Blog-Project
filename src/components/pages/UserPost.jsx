@@ -41,7 +41,7 @@ export default function UserPost() {
                 <div className="w-full flex justify-center mb-8 relative border
                  border-slate-200 rounded-2xl p-2 shadow-sm overflow-hidden">
                     <img
-                        src={databaseService.getFilePreview(post.featuredImage)}
+                        src={databaseService.getFileView(post.featuredImage)}
                         alt={post.title}
                         className="rounded-xl w-full max-w-125 object-cover"
                     />

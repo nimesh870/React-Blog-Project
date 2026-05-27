@@ -9,7 +9,7 @@ const PostCard = ({ $id , title , featuredImage }) => {
          shadow-md hover:shadow-xl hover:-translate-y-1
           transition-all duration-300 border border-slate-100'>
             <div className='w-full mb-4 overflow-hidden rounded-xl'>
-                <img src={databaseService.getFilePreview(featuredImage)} alt={title} 
+                <img src={databaseService.getFileView(featuredImage)} alt={title} 
                 className='w-full h-48 object-cover rounded-xl
                 hover:scale-105 transition-transform duration-300'
                 />

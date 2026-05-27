@@ -50,10 +50,13 @@ const Header = ( {name} ) => {
             <Link to = '/'>
               <Logo width='70px' />
             </Link>
-            <p className='text-md text-slate-500'>Welcome, {user?.name || "Guest"}</p>
           </div>
 
           <ul className='ml-auto flex items-center gap-1'>
+            <div className='ml-auto mr-6 text-sm text-slate-600'>
+              <p className='text-md text-slate-500'>Welcome back, {user?.name || "Guest"}</p>
+            </div>
+
             {navItems.map( (item) =>  (
               item.active ? (
                 <li key={item.name}>

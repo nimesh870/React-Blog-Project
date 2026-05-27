@@ -81,27 +81,30 @@ const PostForm = ({post}) => {
   
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-      <div className="w-2/3 px-2">
+    <form onSubmit={handleSubmit(submit)} className="flex flex-col lg:flex-row gap-8 bg-white
+    rounded-2xl p-8 border border-slate-200 shadow-md">
+      <div className="flex-1 space-y-6">
           <Input
             label="Title :"
             placeholder="Title"
-            className="mb-4"
+            className="mb-0"
             {...register("title", { required: true })}
           />
           <Input
             label="Slug :"
             placeholder="Slug"
-            className="mb-4"
+            className="mb-0"
             {...register("slug", { required: true })}
             onInput={(e) => {
                 setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                 }}
             />
-
-            <TextEditor label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+            <div className='mb-0'>
+              <TextEditor label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+            </div>
+            
       </div>
-            <div className="w-1/3 px-2">
+            <div className="flex flex-col gap-6 lg:w-80">
                 <Input
                     label="Featured Image :"
                     type="file"
@@ -110,11 +113,12 @@ const PostForm = ({post}) => {
                     {...register("image", { required: !post })}
                 />
                 {post && (
-                    <div className="w-full mb-4">
+                    <div className="w-full mb-0 overflow-hidden rounded-xl">
                         <img
                             src={databaseService.getFilePreview(post.featuredImage)}
                             alt={post.title}
-                            className="rounded-lg"
+                            className="rounded-xl border border-slate-200
+                             shadow-sm w-full h-48 object-cover"
                         />
                     </div>
                 )}

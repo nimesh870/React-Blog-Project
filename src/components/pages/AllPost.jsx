@@ -16,11 +16,11 @@ const AllPost = () => {
   }, [])
 
   return (
-    <div className='w-full py-8'>
+    <div className='w-full py-12 min-h-screen bg-slate-50'>
       <Container>
-        <div className='flex flex-wrap'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
           {posts.map( (post) => (
-            <div key={post.$id} className='p-2 w-1/4'> <PostCard {...post} /> </div>
+            <div key={post.$id}> <PostCard {...post} /> </div>
           ))}
         </div>
       </Container>
