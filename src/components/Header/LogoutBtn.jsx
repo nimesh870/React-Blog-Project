@@ -8,14 +8,14 @@ const LogoutBtn = () => {
     const dispatch = useDispatch()
 
     const handleLogout = () => {
-        authService.logout().then( () =>(
-          dispatch(logout()),
+        authService.logout().then( () => {
+          dispatch(logout())
 
           dispatch(showToast({
             message: "Logged Out Successfully!",
             type : 'success'
           }))
-        ) 
+        }
        )
     }
   return (

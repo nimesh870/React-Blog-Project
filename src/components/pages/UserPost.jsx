@@ -61,6 +61,7 @@ export default function UserPost() {
                 </div>
                 <div className="w-full mb-6 pb-6 border-b border-slate-400">
                     <h1 className="text-3xl font-extrabold text-slate-900 leading-tight">{post.title}</h1>
+                    <p className="text-md font-medium text-slate-700 leading-tight mt-1">By {post.authorName}</p>
                 </div>
                 <div className="browser-css prose prose-slate max-w-none
                             text-slate-700 leading-relaxed">

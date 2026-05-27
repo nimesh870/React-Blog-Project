@@ -4,6 +4,7 @@ const Toast = ({ message , type = 'success' , duration = 4000 }) => {
 
     const [isVisible, setIsVisible] = useState(true)
 
+    // hides toast after duration completion
     useEffect( () => {
         const timer = setTimeout( () => setIsVisible(false) , duration)
         return () => clearTimeout(timer)

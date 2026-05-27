@@ -2,19 +2,26 @@ import React, {useEffect , useState} from 'react'
 import databaseService from '../../appwrite_services/database'
 import Container from '../container/Container'
 import { PostCard } from '../index'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
 
     const [posts, setPosts] = useState([])
+    const authStatus = useSelector(state => state.auth.status)
 
     // fetches all active post from appwrite and display them as cards
     useEffect( () => {
+        if (!authStatus) {
+            setPosts([])
+            return
+        }
+
         databaseService.getPosts().then( (posts) => {
             if (posts) {
                 setPosts(posts.documents)
             }
         } )
-    }, [])
+    }, [authStatus])
 
     if (posts.length === 0) {
         return (
@@ -36,7 +43,7 @@ const Home = () => {
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
                     {posts.map( (post) => (
                         <div key={post.$id}>
-                            <PostCard {...post} />
+                            <PostCard {...post} name = {post.authorName} />
                         </div>
                     ) )}
                 </div>

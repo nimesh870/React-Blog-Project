@@ -11,7 +11,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
-  const toast = useSelector(state => state.toast)
+  const toast = useSelector(state => state.toast) // reading everything from store
 
   useEffect( () => {
     authService.getUser()

@@ -17,7 +17,7 @@ export class DatabaseService {
     }
 
     // create document
-    async createPost ( {title , slug , content , featuredImage , status , userId}) {
+    async createPost ( {title , slug , content , featuredImage , status , authorName , userId}) {
         // SDK fires HTTP POST request to Appwrite server
         try {
             return await this.databases.createDocument(
@@ -30,6 +30,7 @@ export class DatabaseService {
                     featuredImage,
                     status,
                     userId,
+                    authorName,
                     slug
                 }
             )
@@ -40,7 +41,7 @@ export class DatabaseService {
     }
 
     // update document
-    async updatePost (slug , {title , content , featuredImage , status , userId}) {
+    async updatePost (slug , {title , content , featuredImage , status , authorName , userId}) {
         // SDK fires HTTP PATCH request
         try {
             return await this.databases.updateDocument(
@@ -53,7 +54,8 @@ export class DatabaseService {
                     content,
                     featuredImage,
                     status,
-                    userId
+                    userId,
+                    authorName
                 }
             )
         } 

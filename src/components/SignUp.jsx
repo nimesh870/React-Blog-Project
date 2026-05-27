@@ -1,17 +1,24 @@
-import React , { useState } from 'react'
+import React , { useState , useEffect } from 'react'
 import { Logo , Button , Input } from './index'
 import authService from '../appwrite_services/authentication'
 import { Link , useNavigate } from 'react-router-dom'
 import { login } from '../features/authSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch , useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
 const SignUp = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const authStatus = useSelector(state => state.auth.status)
     const {register , handleSubmit} = useForm()
     const [error, setError] = useState('')
+
+    useEffect( () => {
+        if (authStatus) {
+            navigate('/')
+        }
+    }, [authStatus , navigate])
 
     const signUp = async ({email , password , name}) => {
         setError('')
