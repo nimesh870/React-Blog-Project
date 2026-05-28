@@ -5,6 +5,7 @@ import { Link , useNavigate } from 'react-router-dom'
 import { login } from '../features/authSlice'
 import { useDispatch , useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
+import { showToast } from '../features/toastSlice'
 
 const SignUp = () => {
 
@@ -14,33 +15,39 @@ const SignUp = () => {
     const {register , handleSubmit} = useForm()
     const [error, setError] = useState('')
 
-    useEffect( () => {
-        if (authStatus) {
-            navigate('/')
-        }
-    }, [authStatus , navigate])
-
     const signUp = async ({email , password , name}) => {
         setError('')
         try {
             const userAccount = await authService.createUserAccount({email , password , name})
             if (userAccount) {
                 const currentUserData = await authService.getUser()
-                if (currentUserData)  dispatch(login({
-                    $id : currentUserData.$id,
-                    name : currentUserData.name,
-                    email : currentUserData.email,
-                }))
+                if (currentUserData) 
+                {
+                    dispatch(login({
+                        $id : currentUserData.$id,
+                        name : currentUserData.name,
+                        email : currentUserData.email,
+                    }))
+
+                    dispatch(showToast({
+                        message : "Account Created Successfully!",
+                        type : 'success'
+                    }))
+
+                }
                 navigate('/')
             }
         } catch (error) {
-            setError(error.message)
+            dispatch(showToast({
+                message : "User already exist!",
+                type : 'error'
+            }))
         }
     }
 
   return (
     <div className='flex items-center justify-center min-h-screen bg-slate-50'>
-        <div className={`mx-auto w-full max-w-lg bg-gwhite rounded-2xl
+        <div className={`mx-auto w-full max-w-lg bg-white rounded-2xl
              p-10 border border-slate-200 shadow-xl shadow-slate-200/50`}>
             <div className='mb-2 flex justify-center'>
                 <span className='inline-block w-full max-w-25'>
@@ -58,13 +65,7 @@ const SignUp = () => {
                         Sign In
                     </Link>
                 </p>
-                {error && (
-                            <p className='text-red-500 text-sm text-center mt-4
-                                 bg-red-50 border border-red-200
-                                rounded-xl py-2 px-4'>
-                                {error}
-                            </p>
-)}
+
                 <form onSubmit={handleSubmit(signUp)} className='mt-6'>
                     <div className='space-y-5'>
                         {/* Name input */}

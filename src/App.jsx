@@ -7,7 +7,7 @@ import { Outlet } from 'react-router-dom'
 import Toast from './Toast'
 
 function App() {
-  
+
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
@@ -15,7 +15,7 @@ function App() {
 
   useEffect( () => {
     authService.getUser()
-    .then( (userData) =>{
+    .then( (userData) => {
       if (userData) {
         dispatch(login({
           $id : userData.$id,
@@ -32,9 +32,8 @@ function App() {
 
   return !loading ? (
     <>
-      {
-        toast.visible && <Toast message = {toast.message} type={toast.type}/>
-      }
+      { toast.visible && (<Toast message = {toast.message} type={toast.type}/>) }
+
       <div className='min-h-screen flex flex-col bg-slate-50'>
         <div className='w-full flex flex-col min-h-screen'>
           <Header />

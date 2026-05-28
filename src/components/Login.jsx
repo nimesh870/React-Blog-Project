@@ -1,4 +1,4 @@
-import React , { useState , useEffect } from 'react'
+import React , { useState } from 'react'
 import { Link , useNavigate } from 'react-router-dom'
 import { Logo , Input , Button} from './index'
 import { useDispatch , useSelector } from 'react-redux'
@@ -10,16 +10,10 @@ import { showToast } from '../features/toastSlice'
 const Login = () => {
     
     const navigate = useNavigate()
-    const authStatus = useSelector(state => state.auth.authStatus)
+    const authStatus = useSelector(state => state.auth.status)
     const dispatch = useDispatch()
     const {register , handleSubmit } = useForm()
     const [error, setError] = useState('')
-
-    useEffect( () => {
-        if (authStatus) {
-            navigate('/')
-        }
-    }, [authStatus , navigate])
 
     const login = async ({email , password}) => {
         setError('')
@@ -29,30 +23,28 @@ const Login = () => {
             if (session) {
                 // fetches data of logged user
                 const userData = await authService.getUser()
-                if (userData)
-                    {
+                if (userData) {
                     dispatch(authLogin({
                     $id : userData.$id,
                     email : userData.email,
                     name : userData.name,
-                })) // updates status and userData
-
+                })); // updates status and userData
+                
                 dispatch(showToast({
                     message : "Logged In Successfully!",
                     type : "success"
-                }))
-                
-                } 
+                }));
+
+                }
 
                 navigate('/')
             }
         } 
         catch (error) {
-            setError(error.message)
             dispatch(showToast({
-                message : error.message,
+                message :'Wrong email or password. Please check the credentials.',
                 type : 'error'
-            }))
+            }));
         }
     }
     
@@ -76,15 +68,6 @@ const Login = () => {
                         Sign Up
                 </Link>
         </p>
-
-        {error && (
-                    <p className='text-red-500 text-sm text-center mt-4 
-                    bg-red-50 border border-red-200 
-                    rounded-xl py-2 px-4'>
-                        {error}
-                 </p>
-        )}
-
 
         <form onSubmit={handleSubmit(login)} className='mt-6 space-y-1'>
             <div className='space-y-1'>

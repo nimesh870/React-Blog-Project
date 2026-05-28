@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     visible : false,
     message : '',
-    type : 'success'
+    type : ''
 }
 
 const toastSlice = createSlice({
