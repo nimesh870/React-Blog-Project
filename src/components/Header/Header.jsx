@@ -65,7 +65,7 @@ const Header = ( {name} ) => {
                     text-md font-medium rounded-xl transition-all
                      duration-200 ${location.pathname === item.slug 
                      ?'bg-indigo-50 text-indigo-600 font-semibold' :'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50' }`}
-                      onClick={() => navigate(item.slug)}>{item.name}</button>
+                      onClick={() => {navigate(item.slug)}}>{item.name}</button>
                 </li>
               ) : null
             ))}
