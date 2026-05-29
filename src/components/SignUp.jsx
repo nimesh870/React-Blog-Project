@@ -37,6 +37,12 @@ const SignUp = () => {
                 }
                 navigate('/')
             }
+            else{
+                dispatch(showToast({
+                    message : "User already exist.",
+                    type : 'error'
+                }))
+            }
         } catch (error) {
             dispatch(showToast({
                 message : "User already exist!",

@@ -39,6 +39,12 @@ const Login = () => {
 
                 navigate('/')
             }
+            else {
+                dispatch(showToast({
+                    message : "Wrong email or password. Please check the credentials.",
+                    type : 'error'
+                }))
+            }
         } 
         catch (error) {
             dispatch(showToast({
