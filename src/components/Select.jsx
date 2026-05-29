@@ -12,7 +12,7 @@ const Select = ({
   return (
     <div className='w-full'>
       
-        {label && <label htmlFor = {id} className='inline-block mb-1.5 pl-1 font-medium text-slate-500'></label>}
+        {label && <label htmlFor = {id} className='inline-block mb-1.5 pl-1 font-medium text-slate-500'>{label}</label>}
 
         <select id = {id} {...props} ref={ref}
         className= {`px-4 py-2.5 rounded-xl bg-slate-50

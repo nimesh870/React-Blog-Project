@@ -1,5 +1,7 @@
-import React , { useState , useEffect } from 'react'
-import { Logo , Button , Input } from './index'
+import React , { useEffect } from 'react'
+import Logo from '../Logo'
+import Button from './Button'
+import Input from './Input'
 import authService from '../appwrite_services/authentication'
 import { Link , useNavigate } from 'react-router-dom'
 import { login } from '../features/authSlice'
@@ -13,10 +15,8 @@ const SignUp = () => {
     const dispatch = useDispatch()
     const authStatus = useSelector(state => state.auth.status)
     const {register , handleSubmit} = useForm()
-    const [error, setError] = useState('')
 
     const signUp = async ({email , password , name}) => {
-        setError('')
         try {
             const userAccount = await authService.createUserAccount({email , password , name})
             if (userAccount) {

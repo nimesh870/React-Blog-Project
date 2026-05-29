@@ -1,10 +1,10 @@
 import React from 'react'
-import { Login as LoginForm } from '../index'
+import Login from '../Login'
 
 const Login = () => {
   return (
     <div className='py-12 min-h-screen bg-slate-50'>
-      <LoginForm />
+      <Login />
     </div>
   )
 }

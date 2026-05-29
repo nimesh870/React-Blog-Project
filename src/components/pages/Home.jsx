@@ -1,7 +1,7 @@
 import React, {useEffect , useState} from 'react'
 import databaseService from '../../appwrite_services/database'
 import Container from '../container/Container'
-import { PostCard } from '../index'
+import PostCard from '../PostCard'
 import { useSelector } from 'react-redux'
 
 const Home = () => {

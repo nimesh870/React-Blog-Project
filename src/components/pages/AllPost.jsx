@@ -1,6 +1,6 @@
 import React , { useState , useEffect } from 'react'
 import Container from '../container/Container'
-import { PostCard } from '../index'
+import PostCard from '../PostCard'
 import databaseService from '../../appwrite_services/database'
 import { useSelector } from 'react-redux'
 

@@ -19,7 +19,7 @@ const LogoutBtn = () => {
        )
     }
   return (
-    <button
+    <button type='button'
     onClick={handleLogout}
      className='inline-flex px-4 py-2 text-md font-medium
       text-red-500 hover:text-red-600

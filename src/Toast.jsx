@@ -10,7 +10,7 @@ const Toast = ({ message , type = 'success' , duration = 4000 }) => {
     useEffect( () => {
         const timer = setTimeout( () => dispatch(hideToast()) , duration )
         return () => clearTimeout(timer)
-    },[])
+    },[dispatch , duration])
 
     const bgColor = type === 'success' ? 'bg-emerald-500' : 'bg-red-500';
     const icon = type === 'success' ? '✅' : '❌';

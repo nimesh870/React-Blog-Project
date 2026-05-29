@@ -1,5 +1,6 @@
 import React from 'react'
-import {Container , Logo} from '../index'
+import Container from '../container/Container'
+import Logo from '../../Logo'
 import LogoutBtn from '../Header/LogoutBtn'
 import { Link , useNavigate , useLocation} from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -60,7 +61,7 @@ const Header = ( {name} ) => {
             {navItems.map( (item) =>  (
               item.active ? (
                 <li key={item.name}>
-                  <button className={`inline-block px-4 py-2
+                  <button type='button' className={`inline-block px-4 py-2
                     text-md font-medium rounded-xl transition-all
                      duration-200 ${location.pathname === item.slug 
                      ?'bg-indigo-50 text-indigo-600 font-semibold' :'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50' }`}

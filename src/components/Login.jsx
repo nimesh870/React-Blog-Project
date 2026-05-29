@@ -1,6 +1,8 @@
-import React , { useState } from 'react'
+import React from 'react'
 import { Link , useNavigate } from 'react-router-dom'
-import { Logo , Input , Button} from './index'
+import Logo from '../Logo'
+import Input from './Input'
+import Button from './Button'
 import { useDispatch , useSelector } from 'react-redux'
 import authService from '../appwrite_services/authentication'
 import { login as authLogin } from '../features/authSlice'
@@ -13,10 +15,8 @@ const Login = () => {
     const authStatus = useSelector(state => state.auth.status)
     const dispatch = useDispatch()
     const {register , handleSubmit } = useForm()
-    const [error, setError] = useState('')
 
     const login = async ({email , password}) => {
-        setError('')
         try {
             // returns session obj if credentials are matched
             const session = await authService.login({email , password})
