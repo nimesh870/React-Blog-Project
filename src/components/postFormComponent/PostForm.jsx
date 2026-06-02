@@ -60,10 +60,6 @@ const PostForm = ({post}) => {
           userId : userData.$id,
           authorName : userData.name
         })
-
-        if (dbPost) {
-          navigate(`/post/${dbPost.$id}`)
-        }
       }
     }
   }
