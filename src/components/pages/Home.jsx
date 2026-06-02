@@ -1,24 +1,25 @@
-import React, {useEffect , useState} from 'react'
+import React, {useEffect} from 'react'
 import databaseService from '../../appwrite_services/database'
 import Container from '../container/Container'
 import PostCard from '../PostCard'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPosts } from '../../features/postSlice'
 
 const Home = () => {
 
-    const [posts, setPosts] = useState([])
     const authStatus = useSelector(state => state.auth.status)
+    const posts = useSelector(state => state.post?.posts) || []
+    const dispatch = useDispatch();
 
     // fetches all active post from appwrite and display them as cards
     useEffect( () => {
         if (!authStatus) {
-            setPosts([])
             return
         }
 
         databaseService.getPosts().then( (posts) => {
             if (posts) {
-                setPosts(posts.documents)
+                dispatch(setPosts(posts.documents))
             }
         } )
     }, [authStatus])

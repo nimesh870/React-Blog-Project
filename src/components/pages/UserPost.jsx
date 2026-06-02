@@ -2,27 +2,34 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from '../Button'
 import parse from "html-react-parser";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import databaseService from "../../appwrite_services/database";
 import Container from "../container/Container";
+import { addPost, removePost } from '../../features/postSlice'
 
 // fetches the post posted by user and shows edit and delete button
 export default function UserPost() {
-    const [post, setPost] = useState(null);
+
     const { slug } = useParams();
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const posts = useSelector(state => state.post?.posts) || [];
+    const post = posts.find( p => p.$id === slug )
     const userData = useSelector((state) => state.auth.userData);
-
     const isAuthor = post && userData ? post.userId === userData.$id : false;
 
     useEffect(() => {
-        if (slug) {
-            databaseService.getPost(slug).then((post) => {
-                if (post) setPost(post);
-                else navigate("/");
-            });
-        } else navigate("/");
+        if (slug && !post) {
+            databaseService.getPost(slug).then( (fetchedPost) => {
+                if (fetchedPost) {
+                        dispatch(addPost(fetchedPost))
+                    } else {
+                        navigate('/')
+                    }
+            })
+        } else if(!slug) {
+            navigate('/')
+        }
     }, [slug, navigate]);
 
     const deletePost = () => {
@@ -30,6 +37,7 @@ export default function UserPost() {
         databaseService.deletePost(post.$id).then((status) => {
             if (status) {
                 databaseService.deleteFile(post.featuredImage); // remove image from storage
+                dispatch(removePost(post.$id))
                 navigate("/");
             }
         });

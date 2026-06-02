@@ -93,7 +93,7 @@ const SignUp = () => {
                                 required : true,
                                 validate : {
                                     matchPattern : (value) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/. 
-                            test(value) || "Enter a valid email address."
+                                    test(value) || "Enter a valid email address."
                                 }
                             })}
                         />

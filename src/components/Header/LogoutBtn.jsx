@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import authService from '../../appwrite_services/authentication'
 import { logout } from '../../features/authSlice'
 import { showToast } from '../../features/toastSlice'
+import { clearPosts } from '../../features/postSlice'
 
 const LogoutBtn = () => {
     const dispatch = useDispatch()
@@ -10,6 +11,7 @@ const LogoutBtn = () => {
     const handleLogout = () => {
         authService.logout().then( () => {
           dispatch(logout())
+          dispatch(clearPosts())
 
           dispatch(showToast({
             message: "Logged Out Successfully!",

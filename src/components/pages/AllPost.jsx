@@ -1,22 +1,37 @@
-import React , { useState , useEffect } from 'react'
+import React , { useEffect } from 'react'
 import Container from '../container/Container'
 import PostCard from '../PostCard'
 import databaseService from '../../appwrite_services/database'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPosts } from '../../features/postSlice'
 
 const AllPost = () => {
 
-  const [posts, setPosts] = useState([])
   const authStatus = useSelector(state => state.auth.status)
+  const posts = useSelector(state => state.post?.posts) || []
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // fetches all post regardless its query in appwrite
-    databaseService.getPosts([]).then( (Allpost) => {
-      if (Allpost) {
-        setPosts(Allpost.documents)
+    databaseService.getPosts([]).then( (AllPosts) => {
+      if (AllPosts) {
+        dispatch(setPosts(AllPosts.documents))
       }
     })
   }, [authStatus])
+
+  if (posts.length === 0) {
+        return (
+            <div className='w-full min-h-screen bg-slate-50 flex items-center justify-center'>
+              <Container>
+                <div className='flex flex-col items-center gap-3'>
+                  <h1 className='text-3xl font-extrabold text-slate-900'>No posts available</h1>
+                  <p className='text-slate-500 text-sm'>Check back later for new content.</p>
+                </div>
+              </Container>
+            </div>
+        )
+  }
 
   return (
     <div className='w-full py-12 min-h-screen bg-slate-50'>
