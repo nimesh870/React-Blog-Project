@@ -41,7 +41,7 @@ const Login = () => {
             }
             else {
                 dispatch(showToast({
-                    message : "Wrong email or password. Please check the credentials.",
+                    message : "Invalid email or password. Please check the credentials.",
                     type : 'error'
                 }))
             }
