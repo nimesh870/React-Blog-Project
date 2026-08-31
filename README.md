@@ -9,7 +9,7 @@ Create, publish, and share your stories with a beautiful, responsive blogging pl
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Deployment](https://img.shields.io/badge/deployment-Vercel-black)
 
-**[Live Demo](https://your-beacon-app.vercel.app)** • **[GitHub](https://github.com/yourusername/beacon)** • **[Report Bug](https://github.com/yourusername/beacon/issues)**
+**[Live Demo](react-blog-project-virid.vercel.app/)** • **[GitHub](https://github.com/nimesh870/React-Blog-Project.git)**
 
 ---
 
